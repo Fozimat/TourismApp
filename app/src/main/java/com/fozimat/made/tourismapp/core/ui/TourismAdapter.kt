@@ -6,16 +6,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.fozimat.made.tourismapp.R
-import com.fozimat.made.tourismapp.core.data.source.local.entity.TourismEntity
+import com.fozimat.made.tourismapp.core.domain.model.Tourism
 import com.fozimat.made.tourismapp.databinding.ItemListTourismBinding
-import java.util.ArrayList
+import java.util.*
 
 class TourismAdapter : RecyclerView.Adapter<TourismAdapter.ListViewHolder>() {
 
-    private var listData = ArrayList<TourismEntity>()
-    var onItemClick: ((TourismEntity) -> Unit)? = null
+    private var listData = ArrayList<Tourism>()
+    var onItemClick: ((Tourism) -> Unit)? = null
 
-    fun setData(newListData: List<TourismEntity>?) {
+    fun setData(newListData: List<Tourism>?) {
         if (newListData == null) return
         listData.clear()
         listData.addAll(newListData)
@@ -23,7 +23,9 @@ class TourismAdapter : RecyclerView.Adapter<TourismAdapter.ListViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        ListViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_list_tourism, parent, false))
+        ListViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.item_list_tourism, parent, false)
+        )
 
     override fun getItemCount() = listData.size
 
@@ -34,7 +36,7 @@ class TourismAdapter : RecyclerView.Adapter<TourismAdapter.ListViewHolder>() {
 
     inner class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val binding = ItemListTourismBinding.bind(itemView)
-        fun bind(data: TourismEntity) {
+        fun bind(data: Tourism) {
             with(binding) {
                 Glide.with(itemView.context)
                     .load(data.image)

@@ -1,12 +1,12 @@
 package com.fozimat.made.tourismapp.detail
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.fozimat.made.tourismapp.R
-import com.fozimat.made.tourismapp.core.data.source.local.entity.TourismEntity
+import com.fozimat.made.tourismapp.core.domain.model.Tourism
 import com.fozimat.made.tourismapp.core.ui.ViewModelFactory
 import com.fozimat.made.tourismapp.databinding.ActivityDetailTourismBinding
 
@@ -27,13 +27,14 @@ class DetailTourismActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
 
         val factory = ViewModelFactory.getInstance(this)
-        detailTourismViewModel = ViewModelProvider(this, factory)[DetailTourismViewModel::class.java]
+        detailTourismViewModel =
+            ViewModelProvider(this, factory)[DetailTourismViewModel::class.java]
 
-        val detailTourism = intent.getParcelableExtra<TourismEntity>(EXTRA_DATA)
+        val detailTourism = intent.getParcelableExtra<Tourism>(EXTRA_DATA)
         showDetailTourism(detailTourism)
     }
 
-    private fun showDetailTourism(detailTourism: TourismEntity?) {
+    private fun showDetailTourism(detailTourism: Tourism?) {
         detailTourism?.let {
             supportActionBar?.title = detailTourism.name
             binding.content.tvDetailDescription.text = detailTourism.description
@@ -53,9 +54,19 @@ class DetailTourismActivity : AppCompatActivity() {
 
     private fun setStatusFavorite(statusFavorite: Boolean) {
         if (statusFavorite) {
-            binding.fab.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_favorite_white))
+            binding.fab.setImageDrawable(
+                ContextCompat.getDrawable(
+                    this,
+                    R.drawable.ic_favorite_white
+                )
+            )
         } else {
-            binding.fab.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_not_favorite_white))
+            binding.fab.setImageDrawable(
+                ContextCompat.getDrawable(
+                    this,
+                    R.drawable.ic_not_favorite_white
+                )
+            )
         }
     }
 }
