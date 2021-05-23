@@ -2,8 +2,9 @@ package com.fozimat.made.tourismapp.favorite
 
 import androidx.lifecycle.ViewModel
 import com.fozimat.made.tourismapp.core.data.TourismRepository
+import com.fozimat.made.tourismapp.core.domain.usecase.TourismUseCase
 
-class FavoriteViewModel(tourismRepository: TourismRepository) : ViewModel() {
+class FavoriteViewModel(tourismUseCase: TourismUseCase) : ViewModel() {
 
-    val favoriteTourism = tourismRepository.getFavoriteTourism()
+    val favoriteTourism = tourismUseCase.getFavoriteTourism()
 }

@@ -1,10 +1,10 @@
 package com.fozimat.made.tourismapp.home
 
 import androidx.lifecycle.ViewModel
-import com.fozimat.made.tourismapp.core.data.TourismRepository
+import com.fozimat.made.tourismapp.core.domain.usecase.TourismUseCase
 
-class HomeViewModel(tourismRepository: TourismRepository) : ViewModel() {
+class HomeViewModel(tourismUseCase: TourismUseCase) : ViewModel() {
 
-    val tourism = tourismRepository.getAllTourism()
+    val tourism = tourismUseCase.getAllTourism()
 
 }
