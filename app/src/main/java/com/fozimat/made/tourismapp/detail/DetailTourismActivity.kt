@@ -1,34 +1,39 @@
 package com.fozimat.made.tourismapp.detail
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.fozimat.made.tourismapp.MyApplication
 import com.fozimat.made.tourismapp.R
 import com.fozimat.made.tourismapp.core.domain.model.Tourism
 import com.fozimat.made.tourismapp.core.ui.ViewModelFactory
 import com.fozimat.made.tourismapp.databinding.ActivityDetailTourismBinding
+import javax.inject.Inject
 
 class DetailTourismActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var factory: ViewModelFactory
+
+    private val detailTourismViewModel: DetailTourismViewModel by viewModels {
+        factory
+    }
 
     companion object {
         const val EXTRA_DATA = "extra_data"
     }
 
-    private lateinit var detailTourismViewModel: DetailTourismViewModel
     private lateinit var binding: ActivityDetailTourismBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        (application as MyApplication).appComponent.inject(this)
         super.onCreate(savedInstanceState)
         binding = ActivityDetailTourismBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
-
-        val factory = ViewModelFactory.getInstance(this)
-        detailTourismViewModel =
-            ViewModelProvider(this, factory)[DetailTourismViewModel::class.java]
 
         val detailTourism = intent.getParcelableExtra<Tourism>(EXTRA_DATA)
         showDetailTourism(detailTourism)
