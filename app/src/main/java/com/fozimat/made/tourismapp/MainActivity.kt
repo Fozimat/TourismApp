@@ -11,7 +11,9 @@ import com.fozimat.made.tourismapp.databinding.ActivityMainBinding
 import com.fozimat.made.tourismapp.favorite.FavoriteFragment
 import com.fozimat.made.tourismapp.home.HomeFragment
 import com.google.android.material.navigation.NavigationView
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var binding: ActivityMainBinding

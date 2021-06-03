@@ -5,21 +5,15 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
-import com.fozimat.made.tourismapp.MyApplication
 import com.fozimat.made.tourismapp.R
 import com.fozimat.made.tourismapp.core.domain.model.Tourism
-import com.fozimat.made.tourismapp.core.ui.ViewModelFactory
 import com.fozimat.made.tourismapp.databinding.ActivityDetailTourismBinding
-import javax.inject.Inject
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DetailTourismActivity : AppCompatActivity() {
 
-    @Inject
-    lateinit var factory: ViewModelFactory
-
-    private val detailTourismViewModel: DetailTourismViewModel by viewModels {
-        factory
-    }
+    private val detailTourismViewModel: DetailTourismViewModel by viewModels()
 
     companion object {
         const val EXTRA_DATA = "extra_data"
@@ -28,7 +22,6 @@ class DetailTourismActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailTourismBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        (application as MyApplication).appComponent.inject(this)
         super.onCreate(savedInstanceState)
         binding = ActivityDetailTourismBinding.inflate(layoutInflater)
         setContentView(binding.root)
