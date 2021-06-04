@@ -4,8 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
+import com.fozimat.core.domain.model.Tourism
 import com.fozimat.made.tourismapp.R
-import com.fozimat.made.tourismapp.core.domain.model.Tourism
 import com.fozimat.made.tourismapp.databinding.ActivityDetailTourismBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 

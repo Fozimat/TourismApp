@@ -1,9 +1,9 @@
 package com.fozimat.made.tourismapp
 
 import android.app.Application
-import com.fozimat.made.tourismapp.core.di.databaseModule
-import com.fozimat.made.tourismapp.core.di.networkModule
-import com.fozimat.made.tourismapp.core.di.repositoryModule
+import com.fozimat.core.di.databaseModule
+import com.fozimat.core.di.networkModule
+import com.fozimat.core.di.repositoryModule
 import com.fozimat.made.tourismapp.di.useCaseModule
 import com.fozimat.made.tourismapp.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
