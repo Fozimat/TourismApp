@@ -1,9 +1,12 @@
 package com.fozimat.core.di
 
 import androidx.room.Room
+import com.fozimat.core.data.source.local.room.TourismDatabase
 import com.fozimat.core.data.source.remote.network.ApiService
 import com.fozimat.core.domain.repository.ITourismRepository
 import com.fozimat.core.utils.AppExecutors
+import net.sqlcipher.database.SQLiteDatabase
+import net.sqlcipher.database.SupportFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -13,12 +16,16 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 val databaseModule = module {
-    factory { get<com.fozimat.core.data.source.local.room.TourismDatabase>().tourismDao() }
+    factory { get<TourismDatabase>().tourismDao() }
     single {
+        val passphrase: ByteArray = SQLiteDatabase.getBytes("fozimat".toCharArray())
+        val factory = SupportFactory(passphrase)
         Room.databaseBuilder(
             androidContext(),
-            com.fozimat.core.data.source.local.room.TourismDatabase::class.java, "Tourism.db"
-        ).fallbackToDestructiveMigration().build()
+            TourismDatabase::class.java, "Tourism.db"
+        ).fallbackToDestructiveMigration()
+            .openHelperFactory(factory)
+            .build()
     }
 }
 
